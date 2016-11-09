@@ -1,0 +1,150 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+<!DOCTYPE html>
+
+<html>
+<head>
+  <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="~/bower_components/kendo-ui/styles/kendo.common.min.css" />
+  <link rel="stylesheet" href="~/bower_components/kendo-ui/styles/kendo.bootstrap.min.css" />
+  <link rel="stylesheet" href="~/bower_components/loaders.css/loaders.min.css" />
+  <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="~/bower_components/kendo-ui/js/kendo.all.min.js"></script>
+  <script src="~/bower_components/jszip/dist/jszip.min.js"></script>
+  <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width" />
+  <title>@ViewBag.Title</title>
+  <style>
+      span {
+        display: inline-block;
+      }
+
+      .loader-inner > div {
+        background: #ffb5b5;
+      }
+
+      .critical {
+        background-color: #FFB5B5;
+      }
+
+      .trend {
+      }
+
+      .header {
+        background: #38805D;
+        color: white;
+        padding-bottom: 1em;
+        padding-top: 1em;
+      }
+
+        .header h1 {
+          font-size: 4em;
+          margin-top: 0;
+        }
+
+      .footer {
+        padding-bottom: 1em;
+      }
+
+      .fixed-bot {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .navbar {
+        border-radius: 0;
+        margin-bottom: 0;
+      }
+
+      .navbar-default {
+        background-color: #333;
+        border-color: #737373;
+      }
+
+        .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+          color: white;
+        }
+  </style>
+</head>
+<body>
+  <div class="navbar-container">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">NSLA</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="~/Home/Index">Home</a></li>
+            <li><a href="~/Other/Index">Other</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  </div>
+  <div class="header">
+    <div class="container">
+      <h1>@ViewBag.SubTitle</h1>
+      <hr />
+    </div>
+  </div>
+  <div class="content">
+    @RenderBody()
+  </div>
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <hr />
+        <div class="col-xs-12 col-md-4">
+          <span> © Nucor Steel Louisiana </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function handleActiveLink() {
+      var listItems = $("nav ul").first().children();
+      listItems.each(function (i, li) {
+        var a = $(li).children().first()
+        var href = $(a).attr("href");
+        var trimmed = href.toUpperCase().trim();
+        var path = window.location.pathname.toUpperCase().trim();
+        if (trimmed == path) {
+          $(li).addClass("active");
+        }
+      });
+    }
+    function handleFooterPosition() {
+      var windowSize = $(window).outerHeight();
+      var navbarSize = $(".navbar-container").outerHeight();
+      var headerSize = $(".header").outerHeight();
+      var contentSize = $(".content").outerHeight();
+      var footerSize = $(".footer").outerHeight();
+      var pageSize = headerSize + contentSize + navbarSize;
+      var totalSize = pageSize + footerSize;
+      if (totalSize > windowSize) {
+        $(".footer").removeClass("fixed-bot");
+      }
+      else {
+        $(".footer").addClass("fixed-bot");
+      }
+    }
+    $(function () {
+      handleFooterPosition();
+      handleActiveLink();
+    })
+    $(window).resize(function () {
+      handleFooterPosition();
+    });
+  </script>
+</body>
+</html>

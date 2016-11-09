@@ -1,0 +1,26 @@
+{
+  "name": "AdminInterface",
+  "authors": [
+    "Jared Beach <jared.beach@nucor.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "na",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "src",
+    "tests"
+  ],
+  "dependencies": {
+    "kendo-ui": "https://bower.telerik.com/bower-kendo-ui.git",
+    "jquery": "^3.0.0",
+    "bootstrap": "^3.3.6",
+    "jszip": "2.4.0",
+    "loaders.css": "^0.1.2"
+  }
+}
